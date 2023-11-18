@@ -2,6 +2,7 @@ import os
 import requests
 from flask import Flask, request
 from dotenv import dotenv_values
+from flask_cors import CORS
 
 config = {
     **os.environ,  # override loaded values with environment variables
@@ -15,7 +16,7 @@ DEBUG=bool(config.get("DEBUG", True))
 if not UNSPLASH_KEY:
     raise EnvironmentError("Please create .env.local file and insert there UNSPLASH_KEY value")
 app = Flask(__name__)
-
+CORS(app)
 app.config["DEBUG"] = DEBUG
 
 @app.route("/new-image")
@@ -23,7 +24,8 @@ def new_image():
     word = request.args.get("query")
     headers = {
         "Accept-Version": "v1",
-        "Authorization": "Client-ID " + UNSPLASH_KEY
+        "Authorization": "Client-ID " + UNSPLASH_KEY,
+        "Access-control-allow-origin": "*"
     }
     params = {"query": word}
     response = requests.get(url=UNSPLASH_URL, headers=headers, params=params)
