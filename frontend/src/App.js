@@ -6,7 +6,7 @@ import ImageCard from './components/ImageCard';
 import Welcome from './components/Welcome';
 import { Container, Row, Col } from 'react-bootstrap';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5050';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5050';
 
 const App = () => {
   const [word, setWord] = useState('');
@@ -15,12 +15,14 @@ const App = () => {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     console.log(word);
+    console.log(API_URL);
     fetch(`${API_URL}/new-image?query=${word}`)
       .then((res) => res.json())
       .then((data) => {
         setImages([{ ...data, title: word }, ...images]);
       })
       .catch((err) => {
+        console.log('erro');
         console.log(err);
       });
     setWord('');
