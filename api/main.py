@@ -26,7 +26,7 @@ app.config["DEBUG"] = DEBUG
 @app.route("/new-image")
 def new_image():
     word = request.args.get("query")
-    return {"word": word}
+    #return {"word": word}
     headers = {
         "Accept-Version": "v1",
         "Authorization": "Client-ID " + UNSPLASH_KEY,
