@@ -1,4 +1,5 @@
 """Module providing a function printing python version."""
+
 import os
 import requests
 from flask import Flask, request
@@ -22,11 +23,10 @@ app = Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = DEBUG
 
-
 @app.route("/new-image")
 def new_image():
     word = request.args.get("query")
-    #return {"word": word}
+    # return {"word": word}
     headers = {
         "Accept-Version": "v1",
         "Authorization": "Client-ID " + UNSPLASH_KEY,
